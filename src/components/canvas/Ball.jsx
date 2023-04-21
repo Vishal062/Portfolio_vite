@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useRef, useState  } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   Decal,
@@ -38,20 +38,54 @@ const Ball = (props) => {
 };
 
 const BallCanvas = ({ icon }) => {
+  const [rotation, setRotation] = useState([0, 0, 0]);
+  const ballRef = useRef();
+
+  const handleMouseMove = (event) => {
+    const rect = ballRef.current.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const width = rect.width;
+    const height = rect.height;
+    const speed = 0.10;
+
+    const rotY = (x - width / 2) * speed;
+    const rotX = (y - height / 2) * speed;
+    
+    setRotation([rotX, rotY, 0]);
+  };
+
+  const handleMouseLeave = () => {
+    setRotation([0, 0, 0]);
+  };
+
   return (
     <Canvas
       frameloop='demand'
       dpr={[1, 2]}
       gl={{ preserveDrawingBuffer: true }}
     >
+      <OrbitControls enableZoom={false} />
       <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls enableZoom={false} />
-        <Ball imgUrl={icon} />
+        <Ball imgUrl={icon} ref={ballRef} rotation={rotation} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} />
       </Suspense>
-
       <Preload all />
     </Canvas>
   );
+  // return (
+  //   <Canvas
+  //     frameloop='demand'
+  //     dpr={[1, 2]}
+  //     gl={{ preserveDrawingBuffer: true }}
+  //   >
+  //     <Suspense fallback={<CanvasLoader />}>
+  //       <OrbitControls enableZoom={false} />
+  //       <Ball imgUrl={icon} />
+  //     </Suspense>
+
+  //     <Preload all />
+  //   </Canvas>
+  // );
 };
 
 export default BallCanvas;

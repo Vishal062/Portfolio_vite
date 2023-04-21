@@ -20,11 +20,15 @@ import redux from "./tech/redux.png";
 import tailwind from "./tech/tailwind.png";
 import typescript from "./tech/typescript.png";
 import jestTesting from "./tech/jesttesting.png";
+import postgreSQL from "./tech/postgreSQL.jpg";
+import postman from "./tech/postman.png";
 import threejs from "./tech/threejs.svg";
 
 import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
 import starbucks from "./company/starbucks.png";
+import masaiSchool from "./company/masaiSchool.jpg";
+import IntLogo from "./company/INTLOGO.png";
 import tesla from "./company/tesla.png";
 
 import carrent from "./carrent.png";
@@ -53,6 +57,8 @@ export {
   tailwind,
   typescript,
   jestTesting,
+  postgreSQL,
+  postman,
   threejs,
   meta,
   shopify,
@@ -61,4 +67,6 @@ export {
   carrent,
   jobit,
   tripguide,
+  masaiSchool,
+  IntLogo,
 };
